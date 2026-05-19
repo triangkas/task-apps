@@ -44,6 +44,8 @@ export default function Form({ initialData, id }: Props) {
                 ? await api.put(`/task/${id}`, form)
                 : await api.post(`/task`, form);
 
+                console.log("REQUEST:", res.config?.method, res.config?.url);
+
             if (res.data?.success === false) {
                 setErrors(res.data.message);
                 return;
@@ -120,7 +122,7 @@ export default function Form({ initialData, id }: Props) {
                     )}
                 </div>
 
-                <button className="btn btn-primary" disabled={loading}>
+                <button type="submit" className="btn btn-primary" disabled={loading}>
                     {loading ? "Loading..." : id ? "Update" : "Simpan"}
                 </button>
                 <button type="button" className="btn btn-secondary ms-2" onClick={() => router.push("/")}>
